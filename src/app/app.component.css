@@ -1,0 +1,10 @@
+
+#app-container {
+  display : grid;
+  height:100%;
+  grid-template-rows: 1fr 5fr 1fr;
+}
+
+#content {
+  flex : 8;
+}
