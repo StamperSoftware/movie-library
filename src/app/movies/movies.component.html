@@ -1,0 +1,23 @@
+<h1>Movies</h1>
+<hr>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Release Date</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+    
+        @for (movie of movies; track movie.id) {
+            <tr>
+                <td><a href='/movies/{{movie.id}}'>{{movie.name}}</a> </td>
+                <td>{{ movie.release_date }}</td>
+                <td>{{ movie.mpaa_rating }}</td>
+            </tr>
+        }
+    </tbody>
+    
+</table>

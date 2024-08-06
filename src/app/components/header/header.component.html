@@ -1,0 +1,12 @@
+<div class="p-2 d-flex">
+    <nav class="ms-auto">
+        <div class="list-group ">
+           @if (!jwt) {
+                <a class="list-group-item list-group-item-action badge bg-success text-white" routerLink="/login" routerLinkActive="active">login</a>
+                <a class="list-group-item list-group-item-action badge bg-success text-white" routerLink="/login" routerLinkActive="active">{{jwt}}</a>
+            } @else {
+                <button class="list-group-item list-group-item-action badge bg-danger text-white" (click)="handleLogout()">logout</button>
+            }
+        </div>
+    </nav>
+</div>
