@@ -2,10 +2,14 @@
     <app-header (handleLogoutEvent)='handleLogout()' [jwt]='jwt'></app-header>
     
     <div id="content" class="p-4">
+        
         <app-side-bar [jwt]='jwt'></app-side-bar>  
-        <div class="col-md-6 offset-md-3">
-            <router-outlet (activate)="subscribeToEmitter($event)"></router-outlet>
-            
+        
+        <div>
+            <app-alert [message]="alertMessage" [type]="alertType" type="danger"></app-alert>
+            <div class="col-md-6 offset-md-3">
+                <router-outlet (activate)="subscribeToEmitter($event)"></router-outlet>
+            </div>
         </div>
     </div>
     

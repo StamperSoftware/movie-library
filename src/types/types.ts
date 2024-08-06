@@ -10,3 +10,8 @@
 
 type Rating = "R" | "E" | ""
 type Genre = "Comedy" | "Kids" | ""
+
+export interface Alert {
+    message :string
+    type : string
+}
