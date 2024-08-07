@@ -15,3 +15,8 @@ export interface Alert {
     message :string
     type : string
 }
+
+export interface JWT {
+    error :string
+    access_token:string
+}

@@ -1,6 +1,7 @@
 
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MovieService} from "../../services/movie.service";
+import * as types from '../../types/types'
 
 @Component({
   selector: 'app-movies',
@@ -9,7 +10,10 @@ import {MovieService} from "../../services/movie.service";
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.css'
 })
-export class MoviesComponent {
+export class MoviesComponent implements OnInit {
   movieService = inject(MovieService);
-  movies = this.movieService.getMovies();
+  movies: types.Movie[]=[];
+  ngOnInit() {
+    this.movieService.getMovies().then(movies => this.movies = movies)
+  }
 }

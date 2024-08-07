@@ -16,15 +16,15 @@ export class MovieComponent implements OnInit{
   movieService = inject(MovieService);
   movie:types.Movie = {description: "", genre: "", id: 0, mpaa_rating: "", name: "", release_date: "", runtime: 0}
   
-  ngOnInit():void{
+  async ngOnInit(){
     const id = parseInt(this.route.snapshot.paramMap.get('id') ?? "")
-    const movie = this.movieService.getMovie(id)
-    
-    if (!movie) {
-      history.pushState({error : {error: {message: "Could not find movie"}}}, '', '/error')
-      location.replace("/error")
-    } else {
-      this.movie = movie;
-    }
+    await this.movieService.getMovie(id).then(movie => {
+      if (!movie) {
+        history.pushState({error : {error: {message: "Could not find movie"}}}, '', '/error')
+        location.replace("/error")
+      } else {
+        this.movie = movie;
+      }
+    })
   }
 }

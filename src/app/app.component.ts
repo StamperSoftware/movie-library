@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NavigationStart, Router, RouterOutlet} from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SideBarComponent } from "./components/side-bar/side-bar.component";
@@ -15,7 +15,7 @@ import * as types from '../types/types';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   
   constructor(private router :Router) {}
   
@@ -24,6 +24,14 @@ export class AppComponent {
   alertMessage = '';
   alertType = '';
   
+  ngOnInit() {
+    this.router.events.subscribe((event)=>{
+      if (event instanceof NavigationStart && !!this.alertMessage) {
+        this.setAlertMessage({message:"", type:""})
+      }
+    })
+  }
+
   setAlertMessage(alert:types.Alert){
     this.alertMessage = alert.message;
     this.alertType = alert.type;

@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, inject} from '@angular/core';
 import {InputComponent} from "../ui/input/input.component";
 import * as types from '../../types/types'
+import {AuthenticateService} from "../../services/authenticate.service";
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -11,10 +13,11 @@ import * as types from '../../types/types'
 export class LoginComponent {
   email = "";
   password = "";
+  authenticateService = inject(AuthenticateService);
   
   @Output() handleLoginEvent = new EventEmitter<string>();
-  handleLogin = () => {
-      this.handleLoginEvent.emit('jwt')
+  handleLogin = (token:string) => {
+      this.handleLoginEvent.emit(token)
   }
   
   @Output() setAlertMessageEvent = new EventEmitter<types.Alert>();
@@ -32,11 +35,19 @@ export class LoginComponent {
   
   handleSubmit = (e:MouseEvent) => { 
     e.preventDefault();
-    if (this.email === "admin@example.com") {
-      this.handleLogin()
-    } else {
-      this.handleError({message : "Invalid Credentials", type : "danger"})
-    }
+    
+    this.authenticateService.authenticateUser(this.email, this.password)
+        .then(data => {
+          if (data.error) {
+            this.handleError({message : "Invalid Credentials", type : "danger"})
+            return
+          } 
+          
+          this.handleLogin(data.access_token);
+        }).catch(err=>{
+          this.handleError({message : err, type : "danger"})
+        })
+    
   }
 
 }
