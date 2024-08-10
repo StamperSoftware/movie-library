@@ -1,7 +1,7 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import { MovieService } from "../../services/movie.service";
 import * as types from "../../types/types"
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-movie',
@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrl: './movie.component.css'
 })
 export class MovieComponent implements OnInit{
-  constructor(private route:ActivatedRoute) {}
+  constructor(private route:ActivatedRoute, router:Router) {}
   
   movieService = inject(MovieService);
   movie:types.Movie = {description: "", genre: "", id: 0, mpaa_rating: "", name: "", release_date: "", runtime: 0}

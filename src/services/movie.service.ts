@@ -5,6 +5,7 @@ import * as types from '../types/types'
 export class MovieService {
     constructor() {}
     private url = `http://localhost:8080/api/movies`
+    private adminUrl = `http://localhost:8080/api/admin/movies`
     
     async getMovies(): Promise<types.Movie[]> {
         const headers = new Headers();
@@ -14,6 +15,18 @@ export class MovieService {
             headers,
         }
         const response = await fetch(this.url, requestOptions);
+        return await response.json();
+    }
+    
+    async getAdminMovies(jwt:string): Promise<types.Movie[]> {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${jwt}`);
+        const requestOptions = {
+            methods: "GET",
+            headers,
+        }
+        const response = await fetch(this.adminUrl, requestOptions);
         return await response.json();
     }
     

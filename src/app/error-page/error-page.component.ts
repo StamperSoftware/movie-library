@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-error-page',
@@ -8,5 +9,8 @@ import {Component, Input} from '@angular/core';
   styleUrl: './error-page.component.css'
 })
 export class ErrorPageComponent {
-  error = history?.state?.error?.error?.message;
+    constructor(private route:ActivatedRoute) {
+        console.log( this.route);
+    }
+    error = history?.state?.error?.error?.message;
 }
