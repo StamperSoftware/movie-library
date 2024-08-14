@@ -7,14 +7,14 @@ export class MovieService {
     private url = `http://localhost:8080/api/movies`
     private adminUrl = `http://localhost:8080/api/admin/movies`
     
-    async getMovies(): Promise<types.Movie[]> {
+    async getMovies(genre:number): Promise<types.Movie[]> {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         const requestOptions = {
             methods: "GET",
             headers,
         }
-        const response = await fetch(this.url, requestOptions);
+        const response = await fetch(`${this.url}?genre=${genre}`, requestOptions);
         return await response.json();
     }
     
