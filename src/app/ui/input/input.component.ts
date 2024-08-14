@@ -9,12 +9,12 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class InputComponent{
   
-  @Input() name = ''
+  @Input() title = ''
   @Input() type = ''
   @Input() placeholder = ''
   @Input() autoComplete = ''
   @Input() value = ''
-  @Input() errorMessage = ''
+  @Input() errorMsg = ''
   @Output() onChangeEvent = new EventEmitter<string>();
   
   onChange(value:string){

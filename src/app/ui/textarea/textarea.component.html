@@ -1,7 +1,7 @@
 <div class="mb-3">
-    <label for="{{name}}" class="form-label">{{title}}</label>
-    <textarea class="form-control" id="{{name}}" name="{{name}}" value="{{value}}"
-        (change)="onChange()" rows="{{rows}}"
+    <label for="{{title}}" class="form-label">{{title}}</label>
+    <textarea #textArea class="form-control" id="{{title}}" name="{{title}}" value="{{value}}"
+              (input)="onChange(textArea.value)" rows="{{rows}}"
     ></textarea>
-    <div class="{{errorClass}}">{{errorMsg}}</div>
+    <div class="text-danger error-div">{{errorMsg}}</div>
 </div>

@@ -13,7 +13,7 @@
     
         @for (movie of movies; track movie.id) {
             <tr>
-                <td><a href='/admin/movies/{{movie.id}}'>{{movie.name}}</a> </td>
+                <td><a routerLink='/admin/movies/{{movie.id}}' routerLinkActive="active">{{movie.title}}</a> </td>
                 <td>{{ movie.release_date }}</td>
                 <td>{{ movie.mpaa_rating }}</td>
             </tr>

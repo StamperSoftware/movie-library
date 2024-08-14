@@ -1,7 +1,20 @@
 <div>
-    <h2>Movie: {{movie.name}}</h2>
-    <small><em>{{movie.release_date}}, {{movie.runtime}} minutes, Rated {{movie.mpaa_rating}}</em></small>
+    <h2>Movie: {{movie.title}}</h2>
+    <small><em>{{movie.release_date}}, {{movie.run_time}} minutes, Rated {{movie.mpaa_rating}}</em></small>
+    <br>
+    @for (genre of movie.genres; track genre.id) {
+        <span class="badge bg-secondary me-2">{{ genre.genre }}</span>
+    }
     <hr>
+    
+    @if (movie.image != '') {
+        <div class="mb-3">
+            <img src="https://image.tmdb.org/t/p/w200/{{movie.image}}" alt="movie-poster">
+        </div>
+    }
+    
     <p>{{movie.description}}</p>
+    
+   
 </div>
 

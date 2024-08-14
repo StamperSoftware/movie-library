@@ -14,7 +14,7 @@ export class MovieComponent implements OnInit{
   constructor(private route:ActivatedRoute, router:Router) {}
   
   movieService = inject(MovieService);
-  movie:types.Movie = {description: "", genre: "", id: 0, mpaa_rating: "", name: "", release_date: "", runtime: 0}
+  movie:types.Movie = {description: "", id: 0, mpaa_rating: "", title: "", release_date: "", run_time: 0, genres:[], image : '', genres_array:[]}
   
   async ngOnInit(){
     const id = parseInt(this.route.snapshot.paramMap.get('id') ?? "")

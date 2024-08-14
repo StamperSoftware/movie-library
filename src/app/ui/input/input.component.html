@@ -1,18 +1,18 @@
 <div class="mb-3 form-group">
-    <label for="{{name}}" class="form-label mb-0">
-        {{name}}
+    <label for="{{title}}" class="form-label mb-0">
+        {{title}}
     </label>
     <input 
         class="form-control"
         #inputElement
         type="{{type}}"
-        id="{{name}}"
-        name="{{name}}"
+        id="{{title}}"
+        name="{{title}}"
         placeholder="{{placeholder}}"
         (input)="onChange(inputElement.value)"
         autocomplete="{{autoComplete}}"
         value="{{value}}"
     >
     
-    <div class="error-div">{{errorMessage}}</div>
+    <div class="text-danger error-div">{{errorMsg}}</div>
 </div>

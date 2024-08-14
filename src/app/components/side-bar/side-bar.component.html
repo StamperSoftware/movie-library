@@ -4,8 +4,8 @@
         <a class="list-group-item list-group-item-action" routerLink="/movies" routerLinkActive="active">Movies</a>
         <a class="list-group-item list-group-item-action" routerLink="/genres" routerLinkActive="active">Genre</a>
         
-        @if (jwt) {
-            <a class="list-group-item list-group-item-action" routerLink="/admin/create-movie/0" routerLinkActive="active">Add Movie</a>
+        @if (jwt()) {
+            <a class="list-group-item list-group-item-action" routerLink="/admin/create-movie" routerLinkActive="active">Add Movie</a>
             <a class="list-group-item list-group-item-action" routerLink="/admin/manage-catalog" routerLinkActive="active">Manage Catalog</a>
             <a class="list-group-item list-group-item-action" routerLink="/admin/search-movies" routerLinkActive="active">Search</a>
         }

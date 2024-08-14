@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, Input} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
@@ -9,5 +9,5 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent {
-  @Input() jwt = ''
+  jwt = input<string>("")
 }

@@ -3,8 +3,8 @@
     <hr>
     <form>
             
-        <app-input name="Email Address" (onChangeEvent)="emailChange($event)" type="email"/>
-        <app-input name="Password" (onChangeEvent)="passwordChange($event)" type="password"/>
+        <app-input title="Email Address" (onChangeEvent)="emailChange($event)" type="email"/>
+        <app-input title="Password" (onChangeEvent)="passwordChange($event)" type="password"/>
         <hr>
         <button class="btn btn-primary" (click)="handleSubmit($event)">Login</button>
     </form>

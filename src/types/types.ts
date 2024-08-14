@@ -1,15 +1,17 @@
-﻿export interface Movie {
-    name : string
-    genre : string
+﻿export type Genre = {id:number,genre:string,checked:boolean}
+export interface Movie {
+    title : string
     id : number
     release_date : string
     mpaa_rating : string
     description : string
-    runtime : number
+    run_time : number
+    genres : Genre[]
+    genres_array: number[]
+    image : string
 }
 
 type Rating = "R" | "E" | ""
-type Genre = "Comedy" | "Kids" | ""
 
 export interface Alert {
     message :string

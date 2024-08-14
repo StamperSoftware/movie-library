@@ -1,30 +1,28 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, input, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { MovieService } from "../../services/movie.service";
 import * as types from "../../types/types"
-import {Router} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {AuthenticateService} from "../../services/authenticate.service";
 
 @Component({
     selector: 'app-manage-catalog',
     standalone: true,
-    imports: [],
+    imports: [
+        RouterLink,
+        RouterLinkActive
+    ],
     templateUrl: './manage-catalog.component.html',
     styleUrl: './manage-catalog.component.css'
 })
 
-export class ManageCatalogComponent implements OnInit{
+export class ManageCatalogComponent implements OnInit {
     constructor(private router:Router) {
     }
     movieService = inject(MovieService);
     movies: types.Movie[]=[];
-    @Input() jwt = "";
-    
-    
+    @Input() jwt = ''
+
     ngOnInit() {
-      if (!this.jwt) {
-        this.router.navigate(["/"])
-        return;
-      }
-      
       this.movieService.getAdminMovies(this.jwt).then(movies => this.movies = movies)
     }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-textarea',
@@ -9,11 +9,14 @@ import {Component, Input} from '@angular/core';
 })
 export class TextareaComponent {
 
-  @Input() name = ""
   @Input() title = ""
   @Input() value = ""
   @Input() rows = ""
-  @Input() onChange = ()=>{}
-  @Input() errorClass = ""
   @Input() errorMsg = ""
+  
+  @Output() onChangeEvent = new EventEmitter<string>();
+  
+  onChange(value:string){
+    this.onChangeEvent.emit(value)
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-checkbox',
@@ -9,9 +9,12 @@ import {Component, Input} from '@angular/core';
 })
 export class CheckboxComponent {
 
-  @Input() name = ""
   @Input() title = ""
   @Input() value = ""
-  @Input() onChange = ()=>{}
-  @Input() checked = false
+  @Input() checked = false  
+  
+  @Output() onChangeEvent = new EventEmitter<Event>();
+  onChange(e:Event){
+    this.onChangeEvent.emit(e)
+  }
 }

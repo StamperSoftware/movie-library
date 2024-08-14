@@ -1,1 +1,23 @@
-<p>create-movie works!</p>
+<h2>Add/Edit Movie</h2>
+<hr>
+<form action="" (submit)="handleSubmit($event)">
+    <input type="hidden" name="id" value="{{movie.id}}">
+    <app-input [errorMsg]="hasError('title') ? 'Title must be filled out' : '' " title="Title" type="text" value="{{movie.title}}" (onChangeEvent)="handleChange($event, 'title')"></app-input>
+    <app-input [errorMsg]="hasError('release_date') ? 'Release Date must be filled out' : '' " title="Release Date" type="date" value="{{movie.release_date}}" (onChangeEvent)="handleChange($event, 'release_date')"></app-input>
+    <app-input [errorMsg]="hasError('run_time') ? 'Runtime must be filled out' : '' " title="Runtime" type="text" value="{{movie.run_time}}" (onChangeEvent)="handleChange($event, 'run_time')"></app-input>
+    <app-select [errorMsg]="hasError('mpaa_rating') ? 'Rating must be filled out' : '' " title="MPAA Rating" type="text" value="{{movie.mpaa_rating}}" (onChangeEvent)="handleChange($event, 'mpaa_rating')"
+        [options]="mpaa_ratings"
+    ></app-select>
+    <app-textarea [errorMsg]="hasError('description') ? 'Description must be filled out' : '' " title="Description" type="text" value="{{movie.description}}" (onChangeEvent)="handleChange($event, 'description')"></app-textarea>
+
+    <hr>
+    <h3>Genres</h3>
+    @for (genre of movie.genres; track genre.id) {
+        <app-checkbox [value]="genre.id.toString()" [title]="genre.genre" id="genre-{{genre.id}}" [checked]="genre.checked" (onChangeEvent)="handleCheck($event, genre.id)"></app-checkbox>
+    }
+    <hr>
+    <button class="btn btn-primary">Save</button>
+    @if (!!movie.id) {
+        <button class="btn btn-danger ms-2" type="button" (click)="handleDelete()">Delete Movie</button>
+    }
+</form>

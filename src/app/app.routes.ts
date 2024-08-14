@@ -21,6 +21,7 @@ export const routes: Routes = [
     { path:"genres", component:GenresComponent },
     { path:"admin/search-movies", component:SearchMoviesComponent },
     { path:"admin/manage-catalog", component:ManageCatalogComponent},
-    { path:"admin/create-movie/:id", component:CreateMovieComponent },
+    { path:"admin/movies/:id", component:CreateMovieComponent },
+    { path:"admin/create-movie", component:CreateMovieComponent },
     { path:"**", component:PageNotFoundComponent },
 ];

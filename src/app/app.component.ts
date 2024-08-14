@@ -1,4 +1,4 @@
-import {Component, OnInit,inject} from '@angular/core';
+import {Component, OnInit, inject, signal} from '@angular/core';
 import {NavigationStart, Router, RouterOutlet} from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -18,12 +18,12 @@ import {CreateMovieComponent} from "./create-movie/create-movie.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   authService = inject(AuthenticateService)
   constructor(private router :Router) {}
   
   title = 'movie-library';
-  jwt = '';
+  jwt = signal("");
   alertMessage = '';
   alertType = '';
   tickInterval = setInterval(() => {});
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
     this.authService.refreshToken()
         .then(data=>{
           if (data.access_token) {
-            this.jwt = data.access_token;
+            this.jwt.set(data.access_token);
             this.toggleRefresh(true)
           }
         }).catch(err=>{console.log("user is not logged in", err)})
@@ -53,14 +53,15 @@ export class AppComponent implements OnInit{
   
   handleLogout() {
     this.authService.logoutUser().finally(()=>{
-      this.jwt = '';
+      this.jwt.set('');
+      
       this.toggleRefresh(false)
       this.router.navigate(['/login'])
     })
   }
   
   handleLogin(jwt:string){
-    this.jwt = jwt;
+    this.jwt.set(jwt);
     this.alertMessage = '';
     this.alertType = '';
     this.toggleRefresh(true)
@@ -74,10 +75,12 @@ export class AppComponent implements OnInit{
       return;
     }
     if (child instanceof ManageCatalogComponent) {
-      child.jwt = this.jwt;
+      child.jwt = this.jwt()
+      return;
     }
     if (child instanceof CreateMovieComponent) {
-      child.jwt = this.jwt;
+      child.jwt = this.jwt()
+      return;
     }
   }
   
@@ -87,7 +90,7 @@ export class AppComponent implements OnInit{
         this.authService.refreshToken()
           .then(data=>{
             if (data.access_token) {
-              this.jwt = data.access_token;
+              this.jwt.set(data.access_token);
               this.toggleRefresh(true)
             }
           }).catch(err=>{console.log("user is not logged in", err)})
