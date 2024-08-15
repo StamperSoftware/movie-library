@@ -1,6 +1,6 @@
 <div>
     <h2>Movie: {{movie.title}}</h2>
-    <small><em>{{movie.release_date}}, {{movie.run_time}} minutes, Rated {{movie.mpaa_rating}}</em></small>
+    <small><em>{{parseDate(movie.release_date)}}, {{movie.run_time}} minutes, Rated {{movie.mpaa_rating}}</em></small>
     <br>
     @for (genre of movie.genres; track genre.id) {
         <span class="badge bg-secondary me-2">{{ genre.genre }}</span>

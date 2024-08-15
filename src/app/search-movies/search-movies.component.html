@@ -1,1 +1,25 @@
-<p>search-movies works!</p>
+<h1>Search Movies</h1>
+<hr>
+<app-input title="search" type="search" [value]="search" (onChangeEvent)="handleChange($event)"></app-input>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Release Date</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+    
+        @for (movie of movies; track movie.id) {
+            <tr>
+                <td><a href='/movies/{{movie.id}}'>{{movie.title}}</a> </td>
+                <td>{{ parseDate(movie.release_date) }}</td>
+                <td>{{ movie.mpaa_rating }}</td>
+            </tr>
+        }
+    </tbody>
+    
+</table>

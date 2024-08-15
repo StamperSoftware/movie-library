@@ -2,6 +2,7 @@ import {Component, inject, Input, OnInit} from '@angular/core';
 import { MovieService } from "../../services/movie.service";
 import * as types from "../../types/types"
 import {ActivatedRoute, Router} from "@angular/router";
+import {parseDate} from "../../helpers/formatters";
 
 @Component({
   selector: 'app-movie',
@@ -12,6 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class MovieComponent implements OnInit{
   constructor(private route:ActivatedRoute, router:Router) {}
+  protected readonly parseDate = parseDate;
   
   movieService = inject(MovieService);
   movie:types.Movie = {description: "", id: 0, mpaa_rating: "", title: "", release_date: "", run_time: 0, genres:[], image : '', genres_array:[]}
@@ -27,4 +29,5 @@ export class MovieComponent implements OnInit{
       }
     })
   }
+
 }

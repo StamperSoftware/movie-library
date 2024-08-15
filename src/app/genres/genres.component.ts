@@ -4,6 +4,7 @@ import * as types from "../../types/types";
 import {SelectComponent} from "../ui/select/select.component";
 import {GenreService} from "../../services/genre.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {parseDate} from "../../helpers/formatters";
 
 @Component({
   selector: 'app-genres',
@@ -16,7 +17,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class GenresComponent implements OnInit {
   
-    route = inject(ActivatedRoute)
+    protected readonly parseDate = parseDate;
     router = inject(Router)
     movieService = inject(MovieService);
     genreService = inject(GenreService);
@@ -36,4 +37,5 @@ export class GenresComponent implements OnInit {
         this.movieService.getMovies(parseInt(genre || "0"))
             .then(movies => this.movies = movies)
     }
+
 }

@@ -3,6 +3,7 @@ import { MovieService } from "../../services/movie.service";
 import * as types from "../../types/types"
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthenticateService} from "../../services/authenticate.service";
+import {parseDate} from "../../helpers/formatters";
 
 @Component({
     selector: 'app-manage-catalog',
@@ -16,8 +17,8 @@ import {AuthenticateService} from "../../services/authenticate.service";
 })
 
 export class ManageCatalogComponent implements OnInit {
-    constructor(private router:Router) {
-    }
+    
+    protected readonly parseDate = parseDate;
     movieService = inject(MovieService);
     movies: types.Movie[]=[];
     @Input() jwt = ''
@@ -25,4 +26,5 @@ export class ManageCatalogComponent implements OnInit {
     ngOnInit() {
       this.movieService.getAdminMovies(this.jwt).then(movies => this.movies = movies)
     }
+
 }

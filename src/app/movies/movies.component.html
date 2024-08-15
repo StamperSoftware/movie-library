@@ -14,7 +14,7 @@
         @for (movie of movies; track movie.id) {
             <tr>
                 <td><a href='/movies/{{movie.id}}'>{{movie.title}}</a> </td>
-                <td>{{ movie.release_date }}</td>
+                <td>{{ parseDate(movie.release_date) }}</td>
                 <td>{{ movie.mpaa_rating }}</td>
             </tr>
         }
